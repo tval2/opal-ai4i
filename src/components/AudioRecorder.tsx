@@ -10,7 +10,9 @@ const AudioRecorder = () => {
 
     const startRecording = async () => {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder = new MediaRecorder(stream, {
+        mimeType: "audio/webm; codecs=opus",
+      });
 
       const newSocket = new WebSocket("ws://localhost:5003");
       setSocket(newSocket);
@@ -30,16 +32,11 @@ const AudioRecorder = () => {
 
       mediaRecorder.addEventListener("dataavailable", (event) => {
         if (newSocket.readyState === WebSocket.OPEN) {
-          event.data.arrayBuffer().then((buffer) => {
-            const base64String = btoa(
-              String.fromCharCode(...new Uint8Array(buffer))
-            );
-            newSocket.send(base64String);
-          });
+          newSocket.send(event.data); // Send the Blob data directly
         }
       });
 
-      mediaRecorder.start(1000);
+      mediaRecorder.start(5000);
       setRecording(true);
     };
 

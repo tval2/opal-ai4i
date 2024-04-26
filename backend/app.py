@@ -1,36 +1,38 @@
 import asyncio
 import websockets
-import whisper
-import base64
-import numpy as np
-import torch
+import os
+from openai import OpenAI
+from pydub import AudioSegment
+from io import BytesIO
+from dotenv import load_dotenv
 
-# Load the Whisper model
-print("why")
-model = whisper.load_model("base.en")
-print("why2")
+load_dotenv()
+LEMONFOX_API_KEY = os.getenv('LEMONFOX_API_KEY')
+
+client = OpenAI(
+  api_key=LEMONFOX_API_KEY,
+  base_url="https://api.lemonfox.ai/v1",
+)
 
 async def transcribe(websocket, path):
     async for message in websocket:
+        print(f"Received message type: {type(message)}")  # Should confirm 'bytes'
+        if isinstance(message, str):
+            print("Expected binary data, received text.")
+            continue  # Skip processing if message is text
+
         try:
-            # Decode the base64-encoded audio data
-            audio_bytes = base64.b64decode(message)
-
-            # Ensure the buffer length is a multiple of 2 for np.int16
-            if len(audio_bytes) % 2 != 0:
-                print("ooookay")
-                audio_bytes = audio_bytes[:-1]  # Remove last byte if odd
-
-            # Convert the audio bytes to a numpy array
-            audio_np = np.frombuffer(audio_bytes, dtype=np.int16)
-
-            # Convert the audio data to float32
-            audio_float = audio_np.astype(np.float32) / np.iinfo(np.int16).max
-
-            # Transcribe the audio using the Whisper model
-            audio = whisper.pad_or_trim(audio_float.flatten())
-            mel = whisper.log_mel_spectrogram(audio).to(model.device)
-            _, transcription, _ = model.transcribe(mel)
+            audio_buffer = BytesIO(message)
+            print(f"Buffer size: {audio_buffer.getbuffer().nbytes} bytes")
+            audio_segment = AudioSegment.from_file(audio_buffer, format="webm")
+            audio_segment = audio_segment.set_frame_rate(16000).set_channels(1)
+            audio_format = audio_segment.export(format="wav")
+            transcription = client.audio.transcriptions.create(
+                model="whisper-1",
+                file=audio_format,
+                language="en"
+            )
+            print("output:::",transcription.text,":::output")
 
             # Send the transcription back to the client
             await websocket.send(transcription.text)
