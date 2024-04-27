@@ -15,30 +15,21 @@ client = OpenAI(
 )
 
 async def transcribe(websocket, path):
+    binary_total = b""
     async for message in websocket:
-        print(f"Received message type: {type(message)}")  # Should confirm 'bytes'
-        if isinstance(message, str):
-            print("Expected binary data, received text.")
-            continue  # Skip processing if message is text
-
-        try:
-            audio_buffer = BytesIO(message)
-            print(f"Buffer size: {audio_buffer.getbuffer().nbytes} bytes")
-            audio_segment = AudioSegment.from_file(audio_buffer, format="webm")
-            audio_segment = audio_segment.set_frame_rate(16000).set_channels(1)
-            audio_format = audio_segment.export(format="wav")
-            transcription = client.audio.transcriptions.create(
-                model="whisper-1",
-                file=audio_format,
-                language="en"
-            )
-            print("output:::",transcription.text,":::output")
-
-            # Send the transcription back to the client
-            await websocket.send(transcription.text)
-
-        except Exception as e:
-            print(f"Error: {e}")
+        binary_total += message
+        audio_buffer = BytesIO(binary_total)
+        print(f"Buffer size: {audio_buffer.getbuffer().nbytes} bytes")
+        audio_segment = AudioSegment.from_file(audio_buffer, format="webm")
+        audio_segment = audio_segment.set_frame_rate(16000).set_channels(1)
+        audio_format = audio_segment.export(format="wav")
+        transcription = client.audio.transcriptions.create(
+            model="whisper-1",
+            file=audio_format,
+            language="en"
+        )
+        print("output:::",transcription.text,":::output")
+        await websocket.send(transcription.text)
 
 start_server = websockets.serve(transcribe, "localhost", 5003)
 
