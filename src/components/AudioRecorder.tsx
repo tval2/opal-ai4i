@@ -5,6 +5,8 @@ const AudioRecorder = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [socket, setSocket] = useState<WebSocket | null>(null);
 
+  const CHUNK_SIZE = 5120;
+
   useEffect(() => {
     let mediaRecorder: MediaRecorder | null = null;
 
@@ -19,6 +21,10 @@ const AudioRecorder = () => {
 
       newSocket.onopen = () => {
         console.log("WebSocket Connected");
+      };
+
+      newSocket.onclose = () => {
+        console.log("WebSocket Closed");
       };
 
       newSocket.onmessage = (event) => {
@@ -36,7 +42,7 @@ const AudioRecorder = () => {
         }
       });
 
-      mediaRecorder.start(5000);
+      mediaRecorder.start(CHUNK_SIZE);
       setRecording(true);
     };
 
