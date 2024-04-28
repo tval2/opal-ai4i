@@ -14,14 +14,17 @@ client = OpenAI(
   base_url="https://api.lemonfox.ai/v1",
 )
 
+CHUNK_SIZE = 5120
+
 async def transcribe(websocket, path):
     binary_total = b""
     async for message in websocket:
         binary_total += message
         audio_buffer = BytesIO(binary_total)
-        print(f"Buffer size: {audio_buffer.getbuffer().nbytes} bytes")
         audio_segment = AudioSegment.from_file(audio_buffer, format="webm")
         audio_segment = audio_segment.set_frame_rate(16000).set_channels(1)
+        if len(audio_segment) > CHUNK_SIZE:
+            audio_segment = audio_segment[-5120:]
         audio_format = audio_segment.export(format="wav")
         transcription = client.audio.transcriptions.create(
             model="whisper-1",
