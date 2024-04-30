@@ -1,0 +1,6 @@
+.inputField {
+  border: none;
+  background-color: transparent;
+  min-width: 0;
+  width: 100%;
+}
