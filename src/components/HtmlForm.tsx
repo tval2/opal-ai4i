@@ -1,6 +1,11 @@
-import InputField from "./InputField";
+import React from "react";
+import InputField from "./client/InputField";
+interface HtmlFormProps {
+  formValues: { [key: string]: string };
+  onChange: (name: string, value: string) => void;
+}
 
-const HtmlForm = () => {
+const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
   return (
     <div>
       <p style={{ textIndent: "0pt", textAlign: "left" }}>
@@ -146,7 +151,12 @@ const HtmlForm = () => {
                   textAlign: "left",
                 }}
               >
-                <InputField label="Patient Name:" name="patient_name" />
+                <InputField
+                  label="Patient Name:"
+                  name="patient_name"
+                  value={formValues.patient_name}
+                  onChange={onChange}
+                />
               </div>
             </td>
             <td
@@ -191,7 +201,7 @@ const HtmlForm = () => {
               }}
               colSpan={4}
             >
-              <p
+              <div
                 className="s3"
                 style={{
                   paddingLeft: "5pt",
@@ -200,8 +210,13 @@ const HtmlForm = () => {
                   textAlign: "left",
                 }}
               >
-                Age:
-              </p>
+                <InputField
+                  label="Age:"
+                  name="patient_age"
+                  value={formValues.patient_age}
+                  onChange={onChange}
+                />
+              </div>
             </td>
             <td
               style={{
