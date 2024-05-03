@@ -1,3 +1,7 @@
+In your .env file make sure to have
+LEMONFOX_API_KEY=YOUR_KEY
+NEXT_PUBLIC_GOOGLE_GEMINI_API_KEY=YOUR_KEY
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
