@@ -14,11 +14,6 @@ client = OpenAI(
   base_url="https://api.lemonfox.ai/v1",
 )
 
-# Set the paths to ffmpeg and ffprobe explicitly
-AudioSegment.converter = r"C:\\Users\\User\Documents\\Utils\\ffmpeg-2024-05-02-git-71669f2ad5-full_build\\ffmpeg-2024-05-02-git-71669f2ad5-full_build\\bin\\ffmpeg.exe"
-AudioSegment.ffprobe = r"C:\\Users\\User\\Documents\\Utils\\ffmpeg-2024-05-02-git-71669f2ad5-full_build\\ffmpeg-2024-05-02-git-71669f2ad5-full_build\\bin\\ffprobe.exe"
-
-
 CHUNK_SIZE = 5120
 
 async def transcribe(websocket, path):
@@ -29,8 +24,13 @@ async def transcribe(websocket, path):
         audio_segment = AudioSegment.from_file(audio_buffer, format="webm")
         audio_segment = audio_segment.set_frame_rate(16000).set_channels(1)
         if len(audio_segment) > CHUNK_SIZE:
-            audio_segment = audio_segment[-5120:]
+            audio_segment = audio_segment[-CHUNK_SIZE:]
+
+        # Export audio to bytes and create a BytesIO object
+        audio_buffer = BytesIO()
         audio_format = audio_segment.export(format="wav")
+        audio_buffer.seek(0)  # Move to the start of the BytesIO object
+
         transcription = client.audio.transcriptions.create(
             model="whisper-1",
             file=audio_format,
