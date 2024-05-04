@@ -6,6 +6,12 @@ interface HtmlFormProps {
 }
 
 const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
+  const getCurrentDateTime = () => {
+    const current = new Date();
+    return current.toISOString().slice(0, 19).replace("T", " ");
+  };
+  const curTime = getCurrentDateTime();
+
   return (
     <div>
       <p style={{ textIndent: "0pt", textAlign: "left" }}>
@@ -173,7 +179,7 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
               }}
               colSpan={9}
             >
-              <p
+              <div
                 className="s3"
                 style={{
                   paddingLeft: "5pt",
@@ -182,8 +188,13 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
                   textAlign: "left",
                 }}
               >
-                Date:
-              </p>
+                <InputField
+                  label="Date:"
+                  name="patient_date"
+                  value={curTime}
+                  onChange={onChange}
+                />
+              </div>
             </td>
           </tr>
           <tr style={{ height: "13pt" }}>
@@ -232,17 +243,22 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
               }}
               colSpan={5}
             >
-              <p
+              <div
                 className="s3"
                 style={{
-                  paddingLeft: "6pt",
+                  paddingLeft: "5pt",
                   textIndent: "0pt",
                   lineHeight: "11pt",
                   textAlign: "left",
                 }}
               >
-                Weight:
-              </p>
+                <InputField
+                  label="Weight:"
+                  name="patient_weight"
+                  value={formValues.patient_age}
+                  onChange={onChange}
+                />
+              </div>
             </td>
           </tr>
           <tr style={{ height: "14pt" }}>
@@ -285,16 +301,22 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
               }}
               colSpan={4}
             >
-              <p
+              <div
                 className="s3"
                 style={{
                   paddingLeft: "5pt",
                   textIndent: "0pt",
+                  lineHeight: "11pt",
                   textAlign: "left",
                 }}
               >
-                DOB:
-              </p>
+                <InputField
+                  label="DOB:"
+                  name="patient_dob"
+                  value={formValues.patient_dob}
+                  onChange={onChange}
+                />
+              </div>
             </td>
             <td
               style={{
@@ -535,17 +557,22 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
               colSpan={12}
               rowSpan={2}
             >
-              <p
+              <div
                 className="s3"
                 style={{
-                  paddingTop: "7pt",
                   paddingLeft: "5pt",
                   textIndent: "0pt",
+                  lineHeight: "11pt",
                   textAlign: "left",
                 }}
               >
-                Chief Complaint:
-              </p>
+                <InputField
+                  label="Chief Complaint:"
+                  name="patient_chief_complaint"
+                  value={formValues.patient_chief_complaint}
+                  onChange={onChange}
+                />
+              </div>
             </td>
           </tr>
           <tr style={{ height: "13pt" }}>
@@ -4864,17 +4891,22 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
               }}
               colSpan={14}
             >
-              <p
+              <div
                 className="s3"
                 style={{
-                  paddingTop: "1pt",
                   paddingLeft: "5pt",
                   textIndent: "0pt",
+                  lineHeight: "11pt",
                   textAlign: "left",
                 }}
               >
-                Signs / Symptoms:
-              </p>
+                <InputField
+                  label="Signs/Symptoms:"
+                  name="patient_signs_symptoms"
+                  value={formValues.patient_signs_symptoms}
+                  onChange={onChange}
+                />
+              </div>
             </td>
           </tr>
           <tr style={{ height: "15pt" }}>
@@ -4920,17 +4952,22 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
               }}
               colSpan={14}
             >
-              <p
+              <div
                 className="s3"
                 style={{
-                  paddingTop: "1pt",
                   paddingLeft: "5pt",
                   textIndent: "0pt",
+                  lineHeight: "11pt",
                   textAlign: "left",
                 }}
               >
-                Medications:
-              </p>
+                <InputField
+                  label="Medications:"
+                  name="patient_medications"
+                  value={formValues.patient_medications}
+                  onChange={onChange}
+                />
+              </div>
             </td>
           </tr>
           <tr style={{ height: "15pt" }}>

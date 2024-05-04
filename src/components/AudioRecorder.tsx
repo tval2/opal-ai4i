@@ -5,7 +5,16 @@ import { AllowedModelTypes } from "../types/llm";
 import { FormValues } from "../types/form";
 import { createPromptForField } from "../prompts/prompts";
 
-const starterForm: FormValues = { patient_name: "", patient_age: "" };
+const starterForm: FormValues = {
+  patient_name: "",
+  patient_age: "",
+  patient_weight: "",
+  patient_chief_complaint: "",
+  patient_signs_symptoms: "",
+  patient_medications: "",
+  patient_dob: "",
+  patient_date: "",
+};
 
 const AudioRecorder = () => {
   const [recording, setRecording] = useState(false);
