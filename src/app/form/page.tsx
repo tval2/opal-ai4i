@@ -1,11 +1,10 @@
 "use client";
-import React from "react";
-import HtmlForm from "../../components/HtmlForm";
+import AudioRecorder from "../../components/AudioRecorder";
 
 export default function FormPage() {
   return (
-    <div style={{ backgroundColor: "white", padding: "20px" }}>
-      <HtmlForm formValues={{}} onChange={() => {}} />
-    </div>
+    <main className="flex min-h-screen flex-col items-center justify-center p-10">
+      <AudioRecorder />
+    </main>
   );
 }
