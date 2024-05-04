@@ -1,5 +1,6 @@
 import React from "react";
 import InputField from "./client/InputField";
+import CategoricalField from "./client/CategoricalField";
 interface HtmlFormProps {
   formValues: { [key: string]: string };
   onChange: (name: string, value: string) => void;
@@ -854,29 +855,13 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
               colSpan={2}
               rowSpan={3}
             >
-              <p
-                className="s3"
-                style={{
-                  paddingTop: "5pt",
-                  paddingLeft: "2pt",
-                  textIndent: "0pt",
-                  textAlign: "center",
-                }}
-              >
-                Eye:
-              </p>
-              <p
-                className="s3"
-                style={{
-                  paddingTop: "2pt",
-                  paddingLeft: "2pt",
-                  paddingRight: "1pt",
-                  textIndent: "0pt",
-                  textAlign: "center",
-                }}
-              >
-                4 3 2 1
-              </p>
+              <CategoricalField
+                label="Eye:"
+                name="eye"
+                options={["4", "3", "2", "1"]}
+                value={formValues.eye}
+                onChange={onChange}
+              />
             </td>
             <td
               style={{

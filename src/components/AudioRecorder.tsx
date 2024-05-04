@@ -32,7 +32,7 @@ const AudioRecorder = () => {
         newMessage,
         formValues
       );
-
+      console.log("Generated Prompt:", prompt);
       // Call the LLM with the generated prompt
       const response = await promptLLM(prompt, AllowedModelTypes.TEXT);
       console.log("LLM Response:", response);
