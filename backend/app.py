@@ -24,8 +24,13 @@ async def transcribe(websocket, path):
         audio_segment = AudioSegment.from_file(audio_buffer, format="webm")
         audio_segment = audio_segment.set_frame_rate(16000).set_channels(1)
         if len(audio_segment) > CHUNK_SIZE:
-            audio_segment = audio_segment[-5120:]
+            audio_segment = audio_segment[-CHUNK_SIZE:]
+
+        # Export audio to bytes and create a BytesIO object
+        audio_buffer = BytesIO()
         audio_format = audio_segment.export(format="wav")
+        audio_buffer.seek(0)  # Move to the start of the BytesIO object
+
         transcription = client.audio.transcriptions.create(
             model="whisper-1",
             file=audio_format,
