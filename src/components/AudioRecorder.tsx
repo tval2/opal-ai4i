@@ -27,6 +27,7 @@ const starterForm: FormValues = {
   motor: "",
   type: "",
   sex: ""
+
 };
 
 const AudioRecorder = () => {

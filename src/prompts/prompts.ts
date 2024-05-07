@@ -37,7 +37,7 @@ export function createPromptForField(
     `1. transcription you've previously seen: "${past_transcription}" \n` +
     `2. transcription of the latest audio chunk: "${latest_message}" \n` +
     `3. The fields that need to be filled out are: \n` +
-    `${fieldsString}\n\n` +
+    `${fieldsString}\n\n For type we have options {["medical", "trauma", "cardiac", "first aid"]}` +
     "You must decide which fields to either fill out, edit, or erase. It's perfectly okay if " +
     "given the transcription so far you don't fill any of them out on a given prompt, or if you end" +
     " up leaving some of them blank even at the very end. We must be careful not to make up answers" +

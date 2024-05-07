@@ -501,104 +501,14 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
                   textAlign: "left",
                 }}
               >
-                □ <span className="s6">Medical</span>
-              </p>
-            </td>
-            <td
-              style={{
-                width: "54pt",
-                borderTopStyle: "solid",
-                borderTopWidth: "1pt",
-                borderRightStyle: "solid",
-                borderRightWidth: "1pt",
-              }}
-            >
-              <p
-                className="s4"
-                style={{
-                  paddingLeft: "5pt",
-                  textIndent: "0pt",
-                  textAlign: "left",
-                }}
-              >
-                □ <span className="s6">Trauma</span>
-              </p>
-            </td>
-            <td
-              style={{
-                width: "476pt",
-                borderTopStyle: "solid",
-                borderTopWidth: "1pt",
-                borderLeftStyle: "solid",
-                borderLeftWidth: "1pt",
-                borderBottomStyle: "solid",
-                borderBottomWidth: "1pt",
-                borderRightStyle: "solid",
-                borderRightWidth: "1pt",
-              }}
-              colSpan={12}
-              rowSpan={2}
-            >
-              <div
-                className="s3"
-                style={{
-                  paddingLeft: "5pt",
-                  textIndent: "0pt",
-                  lineHeight: "11pt",
-                  textAlign: "left",
-                }}
-              >
-                <InputField
-                  label="Chief Complaint:"
-                  name="patient_chief_complaint"
-                  value={formValues.patient_chief_complaint}
-                  onChange={onChange}
-                />
-              </div>
-            </td>
-          </tr>
-          <tr style={{ height: "13pt" }}>
-            <td
-              style={{
-                width: "49pt",
-                borderLeftStyle: "solid",
-                borderLeftWidth: "1pt",
-                borderBottomStyle: "solid",
-                borderBottomWidth: "1pt",
-              }}
-            >
-              <p
-                className="s4"
-                style={{
-                  paddingLeft: "5pt",
-                  textIndent: "0pt",
-                  lineHeight: "11pt",
-                  textAlign: "left",
-                }}
-              >
-                □ <span className="s6">Cardiac</span>
-              </p>
-            </td>
-            <td
-              style={{
-                width: "54pt",
-                borderBottomStyle: "solid",
-                borderBottomWidth: "1pt",
-                borderRightStyle: "solid",
-                borderRightWidth: "1pt",
-              }}
-            >
-              <p
-                className="s4"
-                style={{
-                  paddingLeft: "5pt",
-                  textIndent: "0pt",
-                  lineHeight: "11pt",
-                  textAlign: "left",
-                }}
-              >
-                □ <span className="s6">First Aid</span>
-              </p>
+                </p>
+    <CategoricalField
+                label="Type:"
+                name="type"
+                options={["medical", "trauma", "cardiac", "first aid"]}
+                value={formValues.type}
+                onChange={onChange}
+              />
             </td>
           </tr>
           <tr style={{ height: "22pt" }}>
