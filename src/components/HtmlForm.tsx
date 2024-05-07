@@ -342,34 +342,15 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
                   textAlign: "left",
                 }}
               >
-                □ <span className="s5">Male</span>
-              </p>
-            </td>
-            <td
-              style={{
-                width: "58pt",
-                borderTopStyle: "solid",
-                borderTopWidth: "1pt",
-                borderLeftStyle: "solid",
-                borderLeftWidth: "1pt",
-                borderBottomStyle: "solid",
-                borderBottomWidth: "1pt",
-                borderRightStyle: "solid",
-                borderRightWidth: "1pt",
-              }}
-              colSpan={2}
-            >
-              <p
-                className="s4"
-                style={{
-                  paddingLeft: "11pt",
-                  textIndent: "0pt",
-                  lineHeight: "12pt",
-                  textAlign: "left",
-                }}
-              >
-                □ <span className="s5">Female</span>
-              </p>
+                </p>
+                <CategoricalField
+                label="Sex:"
+                name="sex"
+                options={["male","female"]}
+                value={formValues.sex}
+                onChange={onChange}
+              />
+
             </td>
           </tr>
           <tr style={{ height: "13pt" }}>
@@ -857,9 +838,9 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
             >
               <CategoricalField
                 label="Eye:"
-                name="eye"
+                name="eye_opening"
                 options={["4", "3", "2", "1"]}
-                value={formValues.eye}
+                value={formValues.eye_opening}
                 onChange={onChange}
               />
             </td>
@@ -888,8 +869,30 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
                   textAlign: "left",
                 }}
               >
-                Verbal: 5 4 3 2 1
               </p>
+              <td
+              // style={{
+              //   width: "46pt",
+              //   borderTopStyle: "solid",
+              //   borderTopWidth: "1pt",
+              //   borderLeftStyle: "solid",
+              //   borderLeftWidth: "1pt",
+              //   borderBottomStyle: "solid",
+              //   borderBottomWidth: "2pt",
+              //   borderRightStyle: "solid",
+              //   borderRightWidth: "1pt",
+              // }}
+              colSpan={2}
+              rowSpan={3}
+            >
+              <CategoricalField
+                label="Verbal:"
+                name="verbal"
+                options={["5","4", "3", "2", "1"]}
+                value={formValues.verbal}
+                onChange={onChange}
+              />
+            </td>
             </td>
             <td
               style={{
@@ -927,8 +930,15 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
                   textAlign: "center",
                 }}
               >
-                6 5 4 3 2 1
+
               </p>
+              <CategoricalField
+                label="Motor:"
+                name="motor"
+                options={["6","5","4", "3", "2", "1"]}
+                value={formValues.motor}
+                onChange={onChange}
+              />
             </td>
             <td
               style={{

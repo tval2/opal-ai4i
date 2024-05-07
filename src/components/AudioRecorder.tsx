@@ -22,6 +22,11 @@ const starterForm: FormValues = {
   time_depart_ref: "",
   time_arrive_rec: "",
   time_available: "",
+  eye_opening: "",
+  verbal:"",
+  motor: "",
+  type: "",
+  sex: ""
 };
 
 const AudioRecorder = () => {
