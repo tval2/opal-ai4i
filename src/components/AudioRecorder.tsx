@@ -14,6 +14,14 @@ const starterForm: FormValues = {
   patient_medications: "",
   patient_dob: "",
   patient_date: "",
+  evacuation_location: "",
+  time_onset: "",
+  time_dispatched: "",
+  time_en_route: "",
+  time_on_scene: "",
+  time_depart_ref: "",
+  time_arrive_rec: "",
+  time_available: "",
 };
 
 const AudioRecorder = () => {
