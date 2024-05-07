@@ -6,6 +6,16 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --chakra-colors-blue-50: #E3F2FD;
+  --chakra-colors-blue-100: #BBDEFB;
+  --chakra-colors-blue-200: #90CAF9;
+  --chakra-colors-blue-300: #64B5F6;
+  --chakra-colors-blue-400: #42A5F5;
+  --chakra-colors-blue-500: #2196F3;
+  --chakra-colors-blue-600: #1E88E5;
+  --chakra-colors-blue-700: #1976D2;
+  --chakra-colors-blue-800: #1565C0;
+  --chakra-colors-blue-900: #0D47A1;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,11 +29,10 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    to bottom,
+    rgba(var(--background-start-rgb), 0.7),
+    rgba(var(--background-end-rgb), 1)
+  );
 }
 
 @layer utilities {
@@ -32,93 +41,24 @@ body {
   }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  text-indent: 0;
+/* Enhanced styling for Chakra UI elements */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
-.s1 {
-  color: black;
-  font-family: Arial, sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 12pt;
+
+.chakra-ui-light, .chakra-ui-dark {
+  --bg-base: var(--background-start-rgb);
+  --text-color: var(--foreground-rgb);
 }
-.s2 {
-  color: black;
-  font-family: Arial, sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 9pt;
+
+.s1, .s2, .s3, .s4, .s5, .s6, .s7, .s8, .s9, .s10,
+table, tbody {
+  all: unset;
+  display: revert;
 }
-.s3 {
-  color: black;
-  font-family: Arial, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: none;
-  font-size: 10pt;
-}
-.s4 {
-  color: black;
-  font-family: Arial, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: none;
-  font-size: 11pt;
-}
-.s5 {
-  color: black;
-  font-family: Arial, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: none;
-  font-size: 10pt;
-}
-.s6 {
-  color: black;
-  font-family: Arial, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: none;
-  font-size: 9pt;
-}
-.s7 {
-  color: black;
-  font-family: Arial, sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 10pt;
-}
-.s8 {
-  color: black;
-  font-family: Arial, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: none;
-  font-size: 9pt;
-}
-.s9 {
-  color: black;
-  font-family: Arial, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: none;
-  font-size: 7pt;
-}
-.s10 {
-  color: black;
-  font-family: Arial, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: none;
-  font-size: 8pt;
-}
-table,
-tbody {
+
+/* Ensuring tables don't inherit alignment styles from global */
+table, tbody {
   vertical-align: top;
   overflow: visible;
 }
