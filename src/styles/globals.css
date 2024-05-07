@@ -31,3 +31,94 @@ body {
     text-wrap: balance;
   }
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+}
+.s1 {
+  color: black;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 12pt;
+}
+.s2 {
+  color: black;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 9pt;
+}
+.s3 {
+  color: black;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 10pt;
+}
+.s4 {
+  color: black;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 11pt;
+}
+.s5 {
+  color: black;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 10pt;
+}
+.s6 {
+  color: black;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 9pt;
+}
+.s7 {
+  color: black;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 10pt;
+}
+.s8 {
+  color: black;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 9pt;
+}
+.s9 {
+  color: black;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 7pt;
+}
+.s10 {
+  color: black;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 8pt;
+}
+table,
+tbody {
+  vertical-align: top;
+  overflow: visible;
+}

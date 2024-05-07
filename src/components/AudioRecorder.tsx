@@ -5,7 +5,24 @@ import { AllowedModelTypes } from "../types/llm";
 import { FormValues } from "../types/form";
 import { createPromptForField } from "../prompts/prompts";
 
-const starterForm: FormValues = { patient_name: "", patient_age: "" };
+const starterForm: FormValues = {
+  patient_name: "",
+  patient_age: "",
+  patient_weight: "",
+  patient_chief_complaint: "",
+  patient_signs_symptoms: "",
+  patient_medications: "",
+  patient_dob: "",
+  patient_date: "",
+  evacuation_location: "",
+  time_onset: "",
+  time_dispatched: "",
+  time_en_route: "",
+  time_on_scene: "",
+  time_depart_ref: "",
+  time_arrive_rec: "",
+  time_available: "",
+};
 
 const AudioRecorder = () => {
   const [recording, setRecording] = useState(false);
@@ -23,7 +40,7 @@ const AudioRecorder = () => {
         newMessage,
         formValues
       );
-
+      console.log("Generated Prompt:", prompt);
       // Call the LLM with the generated prompt
       const response = await promptLLM(prompt, AllowedModelTypes.TEXT);
       console.log("LLM Response:", response);

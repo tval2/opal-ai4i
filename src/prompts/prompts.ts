@@ -16,6 +16,7 @@ export function createPromptForField(
     })
     .join("\n");
 
+  console.log("ESSAM STRING: ", fieldsString);
   return (
     "You are an AI agent and expert paramedic and emergency responder. " +
     "Specifically, your role is to read a transcription of live audio that" +
