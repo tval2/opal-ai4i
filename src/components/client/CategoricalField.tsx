@@ -1,29 +1,44 @@
+import React from "react";
 import styles from "../../styles/Form.module.css";
 
-interface InputFieldProps {
+interface CategoricalFieldProps {
   label: string;
   name: string;
+  options: string[];
   value: string;
   onChange: (name: string, value: string) => void;
 }
 
-const InputField = ({ label, name, value, onChange }: InputFieldProps) => {
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+const CategoricalField: React.FC<CategoricalFieldProps> = ({
+  label,
+  name,
+  options,
+  value,
+  onChange,
+}) => {
+  const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(name, event.target.value);
   };
 
   return (
-    <div>
-      <label style={{ marginRight: "10px" }}>{label}</label>
-      <input
-        type="text"
-        name={name}
-        value={value}
-        onChange={handleInputChange}
-        className={styles.inputField}
-      />
+    <div className={styles.categoricalField}>
+      <label>{label}</label>
+      <div>
+        {options.map((option, index) => (
+          <label key={index}>
+            <input
+              type="radio"
+              name={name}
+              value={option}
+              checked={value === option}
+              onChange={handleOptionChange}
+            />
+            {option}
+          </label>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default InputField;
+export default CategoricalField;
