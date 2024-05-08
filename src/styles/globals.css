@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --chakra-colors-gray-50: #F7FAFC;
+  --chakra-colors-gray-100: #EDF2F7;
+  --chakra-colors-gray-200: #E2E8F0;
+  --chakra-colors-gray-300: #CBD5E0;
+  --chakra-colors-gray-400: #A0AEC0;
+  --chakra-colors-gray-500: #718096;
+  --chakra-colors-gray-600: #4A5568;
+  --chakra-colors-gray-700: #2D3748;
+  --chakra-colors-gray-800: #1A202C;
+  --chakra-colors-gray-900: #171923;
+
+  --chakra-colors-blue-50: #ebf8ff;
+  --chakra-colors-blue-100: #ceedff;
+  --chakra-colors-blue-200: #90cdf4;
+  --chakra-colors-blue-300: #63b3ed;
+  --chakra-colors-blue-400: #4299e1;
+  --chakra-colors-blue-500: #3182ce;
+  --chakra-colors-blue-600: #2b6cb0;
+  --chakra-colors-blue-700: #2c5282;
+  --chakra-colors-blue-800: #2a4365;
+  --chakra-colors-blue-900: #1a365d;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+button {
+  transition: all 0.3s ease-in-out;
+}
