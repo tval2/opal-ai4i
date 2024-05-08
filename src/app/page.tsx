@@ -77,7 +77,7 @@ function HomePage() {
           onClick={() => console.log('Export to ePCR')}
           style={{ marginBottom: '20px' }}  // Alternatively, directly apply style for bottom margin
         >
-          Export to ePCR
+          Export to ePCR PDF format
         </Button>
       </VStack>
     </ChakraProvider>
