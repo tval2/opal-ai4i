@@ -30,7 +30,6 @@ async def transcribe(websocket, path):
         audio_buffer = BytesIO()
         audio_segment.export(audio_buffer, format="wav")
         audio_buffer.seek(0)  # Move to the start of the BytesIO object
-
         transcription = client.audio.transcriptions.create(
             model="whisper-1",
             file=audio_buffer,
