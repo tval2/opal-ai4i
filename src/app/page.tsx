@@ -8,6 +8,8 @@ import {
   Flex,
   Button,
   Text,
+  VStack,
+  Spacer,
   Drawer,
   DrawerBody,
   DrawerHeader,
@@ -63,13 +65,22 @@ function HomePage() {
   };
 
   return (
-    
     <ChakraProvider>
-    <Navbar />
-    <Flex h="calc(100vh - 48px)" p={4}>
-      <AudioRecorderCard />
-    </Flex>
-  </ChakraProvider>
+      <Navbar />
+      <VStack spacing={4} align="stretch" h="calc(100vh - 48px)" p={4}>
+        <AudioRecorderCard />
+        <Spacer />
+        <Button
+          colorScheme="blue"
+          size="lg"
+          mb={4}  // Added bottom margin to the button
+          onClick={() => console.log('Export to ePCR')}
+          style={{ marginBottom: '20px' }}  // Alternatively, directly apply style for bottom margin
+        >
+          Export to ePCR
+        </Button>
+      </VStack>
+    </ChakraProvider>
   );
 }
 
