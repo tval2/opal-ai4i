@@ -1,26 +1,17 @@
 // src/app/pages.tsx
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
-  Box,
   ChakraProvider,
   Flex,
   Button,
   Text,
   VStack,
   Spacer,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  useDisclosure
-} from '@chakra-ui/react';
-import AudioRecorderCard from '../components/AudioRecorderCard';
-import InputField from '../components/client/InputField';
-import CategoricalField from '../components/client/CategoricalField';
+  useDisclosure,
+} from "@chakra-ui/react";
+import AudioRecorderCard from "../components/AudioRecorderCard";
 
 function HomePage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -42,23 +33,24 @@ function HomePage() {
     time_arrive_rec: "",
     time_available: "",
     eye_opening: "",
-    verbal:"",
+    verbal: "",
     motor: "",
     type: "",
-    sex: ""
+    sex: "",
   });
-
-  const handleFieldChange = (name, value) => {
-    setFormValues(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
 
   const Navbar = () => {
     return (
-      <Flex bg="red.500" color="white" p={3} justifyContent="space-between" alignItems="center">
-        <Text fontSize="lg" fontWeight="bold">Opal - AI Agents for Emergency Response</Text>
+      <Flex
+        bg="red.500"
+        color="white"
+        p={3}
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Text fontSize="lg" fontWeight="bold">
+          Opal - AI Agents for Emergency Response
+        </Text>
         <Button colorScheme="gray">Login</Button> {/* Example button */}
       </Flex>
     );
@@ -73,9 +65,9 @@ function HomePage() {
         <Button
           colorScheme="blue"
           size="lg"
-          mb={4}  // Added bottom margin to the button
-          onClick={() => console.log('Export to ePCR')}
-          style={{ marginBottom: '20px' }}  // Alternatively, directly apply style for bottom margin
+          mb={4} // Added bottom margin to the button
+          onClick={() => console.log("Export to ePCR")}
+          style={{ marginBottom: "20px" }} // Alternatively, directly apply style for bottom margin
         >
           Export to ePCR PDF format
         </Button>
