@@ -333,7 +333,7 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
               }}
               colSpan={3}
             >
-              <p
+              <div
                 className="s4"
                 style={{
                   paddingLeft: "17pt",
@@ -341,16 +341,14 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
                   lineHeight: "12pt",
                   textAlign: "left",
                 }}
-              >
-                </p>
-                <CategoricalField
+              ></div>
+              <CategoricalField
                 label="Sex:"
                 name="sex"
-                options={["male","female"]}
+                options={["male", "female"]}
                 value={formValues.sex}
                 onChange={onChange}
               />
-
             </td>
           </tr>
           <tr style={{ height: "13pt" }}>
@@ -500,9 +498,8 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
                   textIndent: "0pt",
                   textAlign: "left",
                 }}
-              >
-                </p>
-    <CategoricalField
+              ></p>
+              <CategoricalField
                 label="Type:"
                 name="type"
                 options={["medical", "trauma", "cardiac", "first aid"]}
@@ -778,31 +775,14 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
                   lineHeight: "122%",
                   textAlign: "left",
                 }}
-              >
-              </p>
-              <td
-              // style={{
-              //   width: "46pt",
-              //   borderTopStyle: "solid",
-              //   borderTopWidth: "1pt",
-              //   borderLeftStyle: "solid",
-              //   borderLeftWidth: "1pt",
-              //   borderBottomStyle: "solid",
-              //   borderBottomWidth: "2pt",
-              //   borderRightStyle: "solid",
-              //   borderRightWidth: "1pt",
-              // }}
-              colSpan={2}
-              rowSpan={3}
-            >
+              ></p>
               <CategoricalField
                 label="Verbal:"
                 name="verbal"
-                options={["5","4", "3", "2", "1"]}
+                options={["5", "4", "3", "2", "1"]}
                 value={formValues.verbal}
                 onChange={onChange}
               />
-            </td>
             </td>
             <td
               style={{
@@ -839,13 +819,11 @@ const HtmlForm: React.FC<HtmlFormProps> = ({ formValues, onChange }) => {
                   textIndent: "0pt",
                   textAlign: "center",
                 }}
-              >
-
-              </p>
+              ></p>
               <CategoricalField
                 label="Motor:"
                 name="motor"
-                options={["6","5","4", "3", "2", "1"]}
+                options={["6", "5", "4", "3", "2", "1"]}
                 value={formValues.motor}
                 onChange={onChange}
               />
