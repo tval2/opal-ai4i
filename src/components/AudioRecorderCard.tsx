@@ -24,59 +24,69 @@ const starterForm: FormValues = {
   time_arrive_rec: "",
   time_available: "",
   eye_opening: "",
-  verbal:"",
+  verbal: "",
   motor: "",
   type: "",
-  sex: ""
-
+  sex: "",
 };
 
 const AudioRecorderCard = () => {
   const [recording, setRecording] = useState(false);
   const [messages, setMessages] = useState<string[]>([]);
+  const [messagesWithTimestamps, setMessagesWithTimestamps] = useState<
+    string[]
+  >([]);
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const [formValues, setFormValues] = useState<FormValues>(starterForm);
 
   const CHUNK_SIZE = 5120;
 
-  const handleNewMessage = useCallback(
-    async (newMessage: string) => {
-      // Generate the prompt using existing messages and the new message
-      const timestamp = new Date().toLocaleTimeString(); // Current timestamp
+  const handleNewMessage = useCallback(async (newMessage: string) => {
+    const timestamp = new Date().toLocaleTimeString();
+    const messageWithTimestamp = `${timestamp}: ${newMessage} \n`;
+    setMessagesWithTimestamps((prevMessages) => [
+      ...prevMessages,
+      messageWithTimestamp,
+    ]);
+
+    setMessages((prevMessages) => {
+      const updatedMessages = [...prevMessages, newMessage];
+      // Generate the prompt using the updated messages
       const prompt = createPromptForField(
-        messages.join(" "),
+        updatedMessages.join(" "),
         newMessage,
-        formValues
+        formValues // Note: This still uses the potentially stale formValues
       );
       console.log("Generated Prompt:", prompt);
       // Call the LLM with the generated prompt
-      const response = await promptLLM(prompt, AllowedModelTypes.TEXT);
-      console.log("LLM Response:", response);
+      (async () => {
+        const response = await promptLLM(prompt, AllowedModelTypes.TEXT);
+        console.log("LLM Response:", response);
 
-      // Expecting response in the format {key1: 'value1', key2: 'value2'}
-      const jsonMatch = response.match(/\{[^{}]*\}/);
-      if (jsonMatch) {
-        const jsonText = jsonMatch[0];
-        const correctedJson = jsonText.replace(
-          /(['"])?([a-zA-Z0-9_]+)(['"])?:/g,
-          '"$2":'
-        );
+        const jsonMatch = response.match(/\{[^{}]*\}/);
+        if (jsonMatch) {
+          const jsonText = jsonMatch[0];
+          const correctedJson = jsonText.replace(
+            /(['"])?([a-zA-Z0-9_]+)(['"])?:/g,
+            '"$2":'
+          );
 
-        try {
-          const updates = JSON.parse(correctedJson); // Assuming the LLM returns a JSON string
-          if (updates && typeof updates === "object") {
+          try {
+            const updates = JSON.parse(correctedJson);
             setFormValues((prevValues) => ({
               ...prevValues,
               ...updates,
             }));
+          } catch (error) {
+            console.error("Error parsing JSON:", error);
           }
-        } catch (error) {}
-      } else {
-        console.log("No JSON-like data found in response.");
-      }
-    },
-    [formValues]
-  );
+        } else {
+          console.log("No JSON-like data found in response.");
+        }
+      })();
+      return updatedMessages;
+    });
+  }, []);
 
   useEffect(() => {
     let mediaRecorder: MediaRecorder | null = null;
@@ -98,10 +108,7 @@ const AudioRecorderCard = () => {
       };
       newSocket.onmessage = (event) => {
         const message = event.data;
-        const timestamp = new Date().toLocaleTimeString();
-        const messageWithTimestamp = `${timestamp}: ${message}`;
-        handleNewMessage(messageWithTimestamp);
-        setMessages((prevMessages) => [...prevMessages, messageWithTimestamp]);
+        handleNewMessage(message);
       };
 
       newSocket.onerror = (error) => {
@@ -134,7 +141,7 @@ const AudioRecorderCard = () => {
       mediaRecorder?.stop();
       socket?.close();
     };
-  }, [recording, handleNewMessage]);
+  }, [recording]);
 
   const updateFormValue = (fieldName: string, value: string) => {
     setFormValues((prevValues) => ({
@@ -142,7 +149,8 @@ const AudioRecorderCard = () => {
       [fieldName]: value,
     }));
   };
-
+  // const timestamp = new Date().toLocaleTimeString();
+  // const messageWithTimestamp = `${timestamp}: ${message}`;
   return (
     <Flex direction="row" height="100vh">
       <Box flex="1">
@@ -152,7 +160,11 @@ const AudioRecorderCard = () => {
         <Button onClick={() => setRecording(!recording)} mb={2}>
           {recording ? "Stop Recording" : "Start Recording"}
         </Button>
-        <Textarea readOnly value={messages.join('\n')} placeholder="Transcription will appear here..." />
+        <Textarea
+          readOnly
+          value={messagesWithTimestamps.join("\n")}
+          placeholder="Transcription will appear here..."
+        />
       </Box>
     </Flex>
   );

@@ -46,8 +46,8 @@ export function createPromptForField(
     "and the paramedic will be able to focus on the patient and spend more time saving lives. Since we are using" +
     " you in a code base we need all of your answers to come back in the json format " +
     "{key_1: 'new_value_1', key_2: 'new_value_2', ...}. If you return an empty string '' then I will assume you want" +
-    " to erase an exisitng field. If you return a key that already has a value, I'll assume you want to edit it." +
-    " And if you return a key that is blank i'll assume you want to add the new vlaue into the field. I've provided" +
+    " to erase an existing field. If you return a key that already has a value, I'll assume you want to edit it." +
+    " And if you return a key that is blank i'll assume you want to add the new value into the field. I've provided" +
     " the keys we use in our code for you in the prompt above (where it says '- use key patient_name' for example). " +
     "Finally, you can reason all you want (or none at all and just jump to the json) but the final answer must be " +
     "between json brackets { } which I will parse in my code to process and update the form. "
