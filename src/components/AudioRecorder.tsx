@@ -23,11 +23,10 @@ const starterForm: FormValues = {
   time_arrive_rec: "",
   time_available: "",
   eye_opening: "",
-  verbal:"",
+  verbal: "",
   motor: "",
   type: "",
-  sex: ""
-
+  sex: "",
 };
 
 const AudioRecorder = () => {
@@ -130,7 +129,7 @@ const AudioRecorder = () => {
       mediaRecorder?.stop();
       socket?.close();
     };
-  }, [recording, handleNewMessage]);
+  }, [recording]);
 
   const updateFormValue = (fieldName: string, value: string) => {
     setFormValues((prevValues) => ({
